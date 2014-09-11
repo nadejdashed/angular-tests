@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app="appDemo">
+<head>
+	<title>Angular testing</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1251"/>
+	<style>
+		.wrapper {
+			width: 500px;
+			margin: 20px auto;
+		}
+
+		.done {
+			color: green;
+			text-decoration: line-through;
+		}
+
+		span {
+			display: inline-block;
+			width: 100px;
+		}
+	</style>
+</head>
+<body>
+
+<div class="wrapper" ng-controller="appController">
+	<languages value="l"></languages>
+	<div>Done: <span id="done">{{ (items | filter:{done: true}).length }}</span></div>
+	<ul>
+		<li ng-repeat="item in items">
+			<span ng-class="{done: item.done}" ng-click="complete($index)">{{item.text}}</span>
+			<a ng-click="remove($index)">{{'Remove' | i18n : l}}</a>
+		</li>
+	</ul>
+	<input type="text" ng-model="newItem"/>
+	<button ng-click="add()">{{'Add' | i18n : l}}</button>
+</div>
+
+<script src="resources/angular.js"></script>
+<script src="resources/angular-mocks.js"></script>
+
+<script src="scripts/app-demo.module.js"></script>
+<script src="mocks/app-mocks.module.js"></script>
+<script src="scripts/app.module.js"></script>
+<script src="scripts/app.controller.js"></script>
+<script src="scripts/items.service.js"></script>
+<script src="scripts/i18n.service.js"></script>
+<script src="scripts/i18n.filter.js"></script>
+<script src="scripts/languages.directive.js"></script>
+
+</body>
+</html>

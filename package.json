@@ -1,0 +1,19 @@
+{
+  "name": "angular-tests",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "karma": "~0.12.23",
+    "protractor": "~1.2.0"
+  },
+  "devDependencies": {
+    "karma-jasmine": "~0.1.5",
+    "karma-chrome-launcher": "~0.1.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "BSD"
+}

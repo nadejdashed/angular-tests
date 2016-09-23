@@ -2,6 +2,15 @@
 // Generated on Wed Sep 10 2014 20:42:13 GMT+0300 (Kaliningrad Standard Time)
 
 module.exports = function (config) {
+
+	var sourcePreprocessors = 'coverage';
+	function isDebug(argument) {
+		return argument === '--debug';
+	}
+	if (process.argv.some(isDebug)) {
+		sourcePreprocessors = [];
+	}
+
 	config.set({
 
 		// base path that will be used to resolve all patterns (eg. files, exclude)
@@ -32,13 +41,14 @@ module.exports = function (config) {
 		// preprocess matching files before serving them to the browser
 		// available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
 		preprocessors: {
+			'app/scripts/**/*.js': sourcePreprocessors
 		},
 
 
 		// test results reporter to use
 		// possible values: 'dots', 'progress'
 		// available reporters: https://npmjs.org/browse/keyword/karma-reporter
-		reporters: ['progress'],
+		reporters: ['progress', 'coverage'],
 
 
 		// web server port

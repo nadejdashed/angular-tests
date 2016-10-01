@@ -14,10 +14,12 @@ angular.module('mock', [])
 	.value('translations', {
 		en: {
 			'Remove': 'Remove',
-			'Add': 'Add'
+			'Add': 'Add',
+			'Catch': 'Catch me'
 		},
 		ru: {
 			'Remove': 'Удалить',
-			'Add': 'Добавить'
+			'Add': 'Добавить',
+			'Catch': 'Споймай меня'
 		}
 	});

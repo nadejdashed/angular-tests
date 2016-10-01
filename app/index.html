@@ -2,7 +2,7 @@
 <html ng-app="appDemo">
 <head>
 	<title>Angular testing</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=windows-1251"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<style>
 		.wrapper {
 			width: 500px;
@@ -16,7 +16,11 @@
 
 		span {
 			display: inline-block;
-			width: 100px;
+			width: 200px;
+		}
+
+		.magic-button {
+			position:relative;
 		}
 	</style>
 </head>
@@ -32,7 +36,7 @@
 		</li>
 	</ul>
 	<input type="text" ng-model="newItem"/>
-	<button ng-click="add()">{{'Add' | i18n : l}}</button>
+	<button ng-click="add()" magic-button="{{items.length > 2}}">{{buttonText | i18n : l}}</button>
 </div>
 
 <script src="resources/angular.js"></script>
@@ -41,11 +45,12 @@
 <script src="scripts/app-demo.module.js"></script>
 <script src="mocks/app-mocks.module.js"></script>
 <script src="scripts/app.module.js"></script>
-<script src="scripts/app.controller.js"></script>
-<script src="scripts/items.service.js"></script>
-<script src="scripts/i18n.service.js"></script>
-<script src="scripts/i18n.filter.js"></script>
-<script src="scripts/languages.directive.js"></script>
+<script src="scripts/controllers/app.controller.js"></script>
+<script src="scripts/services/items.service.js"></script>
+<script src="scripts/services/i18n.service.js"></script>
+<script src="scripts/filters/i18n.filter.js"></script>
+<script src="scripts/directives/languages.directive.js"></script>
+<script src="scripts/directives/magic-button.directive.js"></script>
 
 </body>
 </html>

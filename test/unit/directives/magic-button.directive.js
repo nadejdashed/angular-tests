@@ -1,6 +1,6 @@
 'use strict';
 
-ddescribe('magicButtonDirective', function () {
+describe('magicButtonDirective', function () {
 	var element, scope, elementScope,
 		$compile;
 
@@ -18,6 +18,13 @@ ddescribe('magicButtonDirective', function () {
 		scope.$digest();
 	}
 
+	// Used to simulate DOM event
+	function triggerEvent(elem, type){
+		var event = document.createEvent('Event');
+		event.initEvent(type);
+		elem.dispatchEvent(event);
+	}
+
 	it('should have class magic button and should have text "Catch" if attribute is true', function () {
 		createDirective(true);
 		expect(element.hasClass('magic-button')).toBeTruthy();
@@ -32,5 +39,18 @@ ddescribe('magicButtonDirective', function () {
 		createDirective();
 		expect(element.hasClass('magic-button')).toBeFalsy();
 		expect(elementScope.buttonText).toBe('Add');
+	});
+
+	it('should change position on mouseover', function(){
+		createDirective(true);
+
+		var elementDOM = element[0],
+			top = elementDOM.style.top,
+			left = elementDOM.style.left;
+
+		triggerEvent(element[0], 'mouseover');
+
+		expect(elementDOM.style.top).not.toBe(top);
+		expect(elementDOM.style.left).not.toBe(left);
 	});
 });

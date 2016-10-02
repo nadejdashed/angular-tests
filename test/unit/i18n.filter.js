@@ -4,9 +4,7 @@ describe('i18nFilter', function () {
 	var i18n,
 		i18nService;
 
-	beforeEach(module('app'));
-
-	beforeEach(module(function ($provide) {
+	beforeEach(module('app', function ($provide) {
 		i18nService = {
 			getText: function () {
 			}

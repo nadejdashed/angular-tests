@@ -1,11 +1,15 @@
 'use strict';
 
-angular.module('app').service('i18nService', ['$http', function ($http) {
+angular.module('app').service('i18nService', ['$http', '$rootScope', function ($http, $rootScope) {
 	var promise,
 		languages = [],
+		language,
 		texts;
 
 	return {
+		getLanguage: function () {
+			return language;
+		},
 		getLanguages: function () {
 			promise || requestLanguages();
 			return languages;
@@ -20,6 +24,7 @@ angular.module('app').service('i18nService', ['$http', function ($http) {
 			var data = response.data;
 
 			Array.prototype.push.apply(languages, Object.keys(data));
+			language = languages[0];
 			texts = data;
 		});
 	}

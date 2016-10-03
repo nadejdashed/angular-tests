@@ -6,6 +6,7 @@ angular.module('appDemo', ['app', 'ngMockE2E', 'mock']).run(function ($httpBacke
 	if (DebugMode) {
 		$httpBackend.whenGET('/items').respond(items);
 		$httpBackend.whenGET('/translations.json').respond(translations);
+		$httpBackend.whenGET(/.html$/).passThrough();
 	} else {
 		$httpBackend.whenGET(/^.*$/).passThrough();
 	}

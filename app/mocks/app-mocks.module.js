@@ -15,11 +15,13 @@ angular.module('mock', [])
 		en: {
 			'Remove': 'Remove',
 			'Add': 'Add',
-			'Catch': 'Catch me'
+			'Catch': 'Catch me',
+			'Adv': 'Advertising'
 		},
 		ru: {
 			'Remove': 'Удалить',
 			'Add': 'Добавить',
-			'Catch': 'Споймай меня'
+			'Catch': 'Споймай меня',
+			'Adv': 'Реклама'
 		}
 	});

@@ -29,20 +29,28 @@ module.exports = function (config) {
 			'app/mocks/**/*.js',
 			'app/scripts/**/*.module.js',
 			'app/scripts/**/*.js',
-			'test/unit/**/*.js'
-		],
-
-
-		// list of files to exclude
-		exclude: [
+			'test/unit/**/*.js',
+			'app/templates/**/*.html'
 		],
 
 
 		// preprocess matching files before serving them to the browser
 		// available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
 		preprocessors: {
-			'app/scripts/**/*.js': sourcePreprocessors
+			'app/scripts/**/*.js': sourcePreprocessors,
+			'app/templates/**/*.html': ['ng-html2js']
 		},
+
+
+		ngHtml2JsPreprocessor: {
+			stripPrefix: 'app',
+			moduleName: 'templates'
+		},
+
+
+		// list of files to exclude
+		exclude: [
+		],
 
 
 		// test results reporter to use

@@ -21,4 +21,13 @@ angular.module('app').controller('appController', ['$scope', 'itemsService', fun
 	$scope.complete = function (ind) {
 		$scope.items[ind].done = true;
 	};
+
+	$scope.reset = function(){
+        var i = $scope.items.length;
+        while( i-- ) {
+            if($scope.items[i].done) {
+                $scope.items.splice(i, 1);
+            }
+        }
+	};
 }]);

@@ -4,9 +4,7 @@ describe('languagesDirective', function () {
 	var element, scope,
 		i18nService;
 
-	beforeEach(module('app'));
-
-	beforeEach(module(function ($provide) {
+	beforeEach(module('app', function ($provide) {
 		i18nService = {
 			getLanguages: function () {
 			}

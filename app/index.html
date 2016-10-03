@@ -20,7 +20,17 @@
 		}
 
 		.magic-button {
-			position:relative;
+			position: relative;
+		}
+
+		.panel {
+			border: 1px solid black;
+			margin: 10px 0;
+		}
+
+		.panel-header {
+			background: ghostwhite;
+			border-bottom: 1px solid black;
 		}
 	</style>
 </head>
@@ -28,15 +38,19 @@
 
 <div class="wrapper" ng-controller="appController">
 	<languages value="l"></languages>
-	<div>Done: <span id="done">{{ (items | filter:{done: true}).length }}</span></div>
-	<ul>
-		<li ng-repeat="item in items">
-			<span ng-class="{done: item.done}" ng-click="complete($index)">{{item.text}}</span>
-			<a ng-click="remove($index)">{{'Remove' | i18n : l}}</a>
-		</li>
-	</ul>
-	<input type="text" ng-model="newItem"/>
-	<button ng-click="add()" magic-button="{{items.length > 2}}">{{buttonText | i18n : l}}</button>
+	<div advertising>
+		<panel header="Results">
+			<results all="items.length" done="(items | filter:{done: true}).length" clear-function="reset()"></results>
+		</panel>
+		<ul>
+			<li ng-repeat="item in items">
+				<span ng-class="{done: item.done}" ng-click="complete($index)">{{item.text}}</span>
+				<a ng-click="remove($index)">{{'Remove' | i18n : l}}</a>
+			</li>
+		</ul>
+		<input type="text" ng-model="newItem"/>
+		<button ng-click="add()" magic-button="{{items.length > 2}}">{{buttonText | i18n : l}}</button>
+	</div>
 </div>
 
 <script src="resources/angular.js"></script>
@@ -51,6 +65,9 @@
 <script src="scripts/filters/i18n.filter.js"></script>
 <script src="scripts/directives/languages.directive.js"></script>
 <script src="scripts/directives/magic-button.directive.js"></script>
+<script src="scripts/directives/advertising.directive.js"></script>
+<script src="scripts/directives/panel.directive.js"></script>
+<script src="scripts/components/results.directive.js"></script>
 
 </body>
 </html>

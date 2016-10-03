@@ -3,7 +3,8 @@
 describe('i18nService', function () {
 	var $httpBackend,
 		mock,
-		i18nService;
+		i18nService,
+		languages;
 
 	beforeEach(module('app'));
 	beforeEach(module('mock'));
@@ -24,6 +25,11 @@ describe('i18nService', function () {
 		$httpBackend.verifyNoOutstandingRequest();
 	});
 
+	function getLanguages(){
+		languages = i18nService.getLanguages();
+		$httpBackend.flush();
+	}
+
 	it('should return languages on the start', function () {
 		var languages;
 
@@ -43,22 +49,24 @@ describe('i18nService', function () {
 			key = Object.keys(mock[language])[0],
 			text = mock[language][key];
 
-		$httpBackend.flush();
+		getLanguages();
 		expect(i18nService.getText(language, key)).toBe(text);
 	});
 
 	it('should return empty string if language does not exist', function () {
-		var language = Object.keys(mock)[0],
+		var languages,
+			language = Object.keys(mock)[0],
 			key = Object.keys(mock[language])[0];
 
-		$httpBackend.flush();
+		getLanguages();
 		expect(i18nService.getText('temp', key)).toBe('');
 	});
 
 	it('should return empty string if key does not exist', function () {
-		var language = Object.keys(mock)[0];
+		var languages,
+			language = Object.keys(mock)[0];
 
-		$httpBackend.flush();
+		getLanguages();
 		expect(i18nService.getText(language, 'temp')).toBe('');
 	});
 });

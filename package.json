@@ -8,6 +8,7 @@
     "protractor": "~1.2.0"
   },
   "devDependencies": {
+    "coveralls": "^2.11.14",
     "karma-chrome-launcher": "~0.1.4",
     "karma-coverage": "^1.1.1",
     "karma-jasmine": "~0.1.5",
@@ -18,7 +19,8 @@
   "scripts": {
     "test": "karma start",
     "test-local": "karma start --browsers PhantomJS2 --single-run false",
-    "test-debug": "karma start --browsers Chrome --single-run false --debug"
+    "test-debug": "karma start --browsers Chrome --single-run false --debug",
+	"coveralls": "cat ./coverage/report-lcov/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "author": "",
   "license": "BSD"

@@ -60,4 +60,14 @@ describe('appController', function () {
 		$scope.complete(ind);
 		expect($scope.items[ind].done).toBeTruthy();
 	});
+
+	it('should remove all done tasks', function () {
+		$scope.items[0].done = true;
+		$scope.items.push({done: true});
+		expect($scope.items.length).toBe(3);
+
+		$scope.reset();
+		expect($scope.items.length).toBe(1);
+		expect($scope.items[0].done).toBeFalsy();
+	});
 });

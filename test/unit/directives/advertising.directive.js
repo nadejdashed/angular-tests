@@ -25,7 +25,7 @@ describe('advertisingDirective', function () {
 	});
 
 	it('should  have initial text after 2 seconds', function () {
-		$timeout.flush(2000);
+		$timeout.flush(1000);
 		expect(element.contents()[1].innerText).toEqual('1');
 	});
 });

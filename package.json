@@ -17,7 +17,7 @@
   },
   "scripts": {
     "test": "karma start",
-    "test-local": "karma start --browsers PhantomJS2",
+    "test-local": "karma start --browsers PhantomJS2 --single-run false",
     "test-debug": "karma start --browsers Chrome --single-run false --debug"
   },
   "author": "",

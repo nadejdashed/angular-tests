@@ -45,11 +45,11 @@
 		<ul>
 			<li ng-repeat="item in items">
 				<span ng-class="{done: item.done}" ng-click="complete($index)">{{item.text}}</span>
-				<a ng-click="remove($index)">{{'Remove' | i18n : l}}</a>
+				<a ng-click="remove($index)">{{'Remove' | i18n}}</a>
 			</li>
 		</ul>
 		<input type="text" ng-model="newItem"/>
-		<button ng-click="add()" magic-button="{{items.length > 3}}">{{buttonText | i18n : l}}</button>
+		<button ng-click="add()" magic-button="{{items.length > 3}}">{{buttonText | i18n}}</button>
 	</div>
 </div>
 

@@ -18,17 +18,9 @@ describe('i18nFilter', function () {
 	}));
 
 	it('should get text from the i18nService', function () {
-		var result = i18n('text', 'language');
+		var result = i18n('text');
 
-		expect(i18nService.getText).toHaveBeenCalled();
-		expect(i18nService.getText).toHaveBeenCalledWith('language', 'text');
+		expect(i18nService.getText).toHaveBeenCalledWith('text');
 		expect(result).toBe('test');
-	});
-
-	it('should use english if language is not set', function () {
-		var text = 'text';
-
-		i18n(text);
-		expect(i18nService.getText).toHaveBeenCalledWith('en', text);
 	});
 });

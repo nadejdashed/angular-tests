@@ -5,39 +5,48 @@ describe('languagesDirective', function () {
 		i18nService;
 
 	beforeEach(module('app', function ($provide) {
+		var lang = 'en';
 		i18nService = {
-			getLanguages: function () {
-			}
+			setLanguage: function(l) { lang = l; },
+			getLanguage: function() { return lang; }
 		};
-		spyOn(i18nService, 'getLanguages').andReturn(['en', 'fr']);
+
 		$provide.value('i18nService', i18nService);
 	}));
 
-	beforeEach(inject(function ($rootScope, $compile) {
+	beforeEach(inject(function ($rootScope, $compile, $q) {
+		i18nService.getLanguages = function () { return $q.resolve(['en', 'fr']); }
+
 		scope = $rootScope.$new();
-		element = '<languages value="l"></languages>';
+		element = '<languages></languages>';
 		element = $compile(element)(scope);
 		scope.$digest();
 	}));
 
 	it('should contains all languages', function () {
 		var isolateScope = element.isolateScope();
-
-		expect(i18nService.getLanguages).toHaveBeenCalled();
 		expect(isolateScope.languages).toEqual(['en', 'fr']);
 	});
 
-	it('should english be default language', function () {
+	it('should receive default language', function () {
 		var isolateScope = element.isolateScope();
 
 		expect(isolateScope.selectedLanguage).toBe('en');
 	});
 
+	it('should not try to set language if it is empty', function () {
+		var isolateScope = element.isolateScope();
+
+		isolateScope.language = undefined;
+		scope.$apply();
+		expect(i18nService.getLanguage()).toBe('en');
+	});
+
 	it('should have possibility to set language', function () {
 		var isolateScope = element.isolateScope();
 
-		scope.l = 'fr';
+		isolateScope.language = 'fr';
 		scope.$apply();
-		expect(isolateScope.selectedLanguage).toBe('fr');
+		expect(i18nService.getLanguage()).toBe('fr');
 	});
 });

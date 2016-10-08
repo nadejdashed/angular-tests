@@ -7,19 +7,29 @@ describe('appController', function () {
 	beforeEach(module('app'));
 
 	beforeEach(inject(function ($rootScope, $controller) {
-		$scope = $rootScope.$new();
-		appController = $controller('appController', {$scope: $scope});
+		var items,
+			itemsService;
 
-		$scope.items = [
-			{
-				done: false,
-				text: 'Write test'
-			},
-			{
-				done: false,
-				text: 'Finish project'
+		items = [{
+			done: false,
+			text: 'Write test'
+		}, {
+			done: false,
+			text: 'Finish project'
+		}];
+
+		itemsService = {
+			getItems: function(){
+				return items;
 			}
-		];
+		};
+
+		$scope = $rootScope.$new();
+		appController = $controller('appController', {
+			itemsService: itemsService,
+			$scope: $scope
+		});
+		$scope.$apply();
 	}));
 
 	it('should add new item to list', function () {

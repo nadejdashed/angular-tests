@@ -10,12 +10,16 @@ angular.module('app').service('i18nService', ['$http', '$rootScope', function ($
 		getLanguage: function () {
 			return language;
 		},
-		getLanguages: function () {
-			promise || requestLanguages();
-			return languages;
+		setLanguage: function(lang) {
+			if (lang && texts[lang]) {
+				language = lang;
+			}
 		},
-		getText: function (language, text) {
-			return texts && texts[language] && texts[language][text] ? texts[language][text] : '';
+		getLanguages: function () {
+			return promise || requestLanguages();
+		},
+		getText: function (text) {
+			return texts && texts[language][text] ? texts[language][text] : '';
 		}
 	};
 
@@ -26,6 +30,9 @@ angular.module('app').service('i18nService', ['$http', '$rootScope', function ($
 			Array.prototype.push.apply(languages, Object.keys(data));
 			language = languages[0];
 			texts = data;
+
+			return languages;
 		});
+		return promise;
 	}
 }]);

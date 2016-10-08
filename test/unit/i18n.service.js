@@ -2,17 +2,21 @@
 
 describe('i18nService', function () {
 	var $httpBackend,
-		mock,
 		i18nService,
 		languages;
 
 	beforeEach(module('app'));
-	beforeEach(module('mock'));
 
-	beforeEach(inject(function ($injector, translations) {
+	beforeEach(inject(function ($injector) {
 		$httpBackend = $injector.get('$httpBackend');
-		mock = translations;
-		$httpBackend.when('GET', '/translations.json').respond(mock);
+		$httpBackend.when('GET', '/translations.json').respond({
+			en: {
+				'Test': 'TestEN'
+			},
+			ru: {
+				'Test': 'TestRU'
+			}
+		});
 
 		i18nService = $injector.get('i18nService');
 	}));
@@ -30,43 +34,55 @@ describe('i18nService', function () {
 		$httpBackend.flush();
 	}
 
-	it('should return languages on the start', function () {
-		var languages;
+	it('should return promise with languages when try receive languages', function () {
+		var languages,
+			success;
 
-		languages = i18nService.getLanguages();
-		expect(languages).toBeDefined();
-		expect(languages.length).toBe(0);
+		success = jasmine.createSpy('success');
+		i18nService.getLanguages().then(success);
 
 		$httpBackend.flush();
+		expect(success).toHaveBeenCalledWith(['en', 'ru']);
+	});
+
+	it('should set first language as default after request', function () {
+		var languages;
+
+		expect(i18nService.getLanguage()).not.toBeDefined();
 
 		languages = i18nService.getLanguages();
-		expect(languages).toBeDefined();
-		expect(languages.length).toBe(2);
+		$httpBackend.flush();
+
+		expect(i18nService.getLanguage()).toBe('en');
 	});
 
-	it('should return text for necessary language', function () {
-		var language = Object.keys(mock)[0],
-			key = Object.keys(mock[language])[0],
-			text = mock[language][key];
-
+	it('should return text for default language if language is not changed', function () {
 		getLanguages();
-		expect(i18nService.getText(language, key)).toBe(text);
+		expect(i18nService.getText('Test')).toBe('TestEN');
 	});
 
-	it('should return empty string if language does not exist', function () {
-		var languages,
-			language = Object.keys(mock)[0],
-			key = Object.keys(mock[language])[0];
-
+	it('should return text for changed language if another language was set', function () {
 		getLanguages();
-		expect(i18nService.getText('temp', key)).toBe('');
+		i18nService.setLanguage('ru');
+		expect(i18nService.getText('Test')).toBe('TestRU');
+	});
+
+	it('should not change language if language is not defined or not exist in languages list', function () {
+		getLanguages();
+		i18nService.setLanguage('ru');
+		i18nService.setLanguage('fr');
+		i18nService.setLanguage();
+		expect(i18nService.getLanguage()).toBe('ru');
+	});
+
+	it('should not change language if language is not exist in translation list', function () {
+		getLanguages();
+		i18nService.setLanguage('fr');
+		expect(i18nService.getLanguage()).toBe('en');
 	});
 
 	it('should return empty string if key does not exist', function () {
-		var languages,
-			language = Object.keys(mock)[0];
-
 		getLanguages();
-		expect(i18nService.getText(language, 'temp')).toBe('');
+		expect(i18nService.getText('temp')).toBe('');
 	});
 });

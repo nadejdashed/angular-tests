@@ -1,27 +1,15 @@
 'use strict';
 
-angular.module('mock', [])
-	.value('items', [
-		{
-			done: false,
-			text: 'Write test'
-		},
-		{
-			done: false,
-			text: 'Finish project'
-		}
-	])
-	.value('translations', {
-		en: {
-			'Remove': 'Remove',
-			'Add': 'Add',
-			'Catch': 'Catch me',
-			'Adv': 'Advertising'
-		},
-		ru: {
-			'Remove': 'Удалить',
-			'Add': 'Добавить',
-			'Catch': 'Споймай меня',
-			'Adv': 'Реклама'
-		}
-	});
+angular.module('appDemo', ['ngMockE2E']).run(function ($httpBackend, items, translations) {
+	var DebugMode = true;
+
+	if (DebugMode) {
+		$httpBackend.whenGET('/items').respond(items);
+		$httpBackend.whenGET('/translations.json').respond(translations);
+		$httpBackend.whenGET(/.html$/).passThrough();
+	} else {
+		$httpBackend.whenGET(/^.*$/).passThrough();
+	}
+});
+
+angular.module('app').requires.push('appDemo');

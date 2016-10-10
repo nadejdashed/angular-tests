@@ -4,7 +4,7 @@ angular.module('app').directive('advertising', function ($timeout, $compile, i18
 	return {
 		transclude: 'element',
 		link: function (scope, element, attr, ctrl, transcludeFn) {
-			var html = '<div>{{"Adv" | i18n}}</div>',
+			var html = '<div>{{ "Adv" | i18n : getLang() }}</div>',
 				advHtml = $compile(html)(scope);
 
 			element.after(advHtml);
@@ -13,7 +13,9 @@ angular.module('app').directive('advertising', function ($timeout, $compile, i18
 				transcludeFn(scope, function(clone){
 					element.after(clone);
 				});
-			}, 2000);
+			}, 20000);
+
+			scope.getLang = i18nService.getLanguage;
 		}
 	};
 });

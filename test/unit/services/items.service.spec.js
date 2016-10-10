@@ -1,14 +1,14 @@
 'use strict';
 
 describe('itemsService', function () {
-	var $httpBackend,
-		itemsService;
+	var suite;
 
 	beforeEach(module('app'));
 
 	beforeEach(inject(function ($injector) {
-		$httpBackend = $injector.get('$httpBackend');
-		$httpBackend.when('GET', '/items').respond([{
+		suite = {};
+		suite.$httpBackend = $injector.get('$httpBackend');
+		suite.$httpBackend.when('GET', '/items').respond([{
 			done: false,
 			text: 'Write test'
 		},
@@ -17,36 +17,38 @@ describe('itemsService', function () {
 			text: 'Finish project'
 		}]);
 
-		itemsService = $injector.get('itemsService');
+		suite.itemsService = $injector.get('itemsService');
 	}));
 
 	afterEach(function () {
 		// Verifies that all of the requests defined via the expect api were made.
 		// If any of the requests were not made, verifyNoOutstandingExpectation throws an exception.
-		$httpBackend.verifyNoOutstandingExpectation();
+		suite.$httpBackend.verifyNoOutstandingExpectation();
 		// Verifies that there are no outstanding requests that need to be flushed.
-		$httpBackend.verifyNoOutstandingRequest();
+		suite.$httpBackend.verifyNoOutstandingRequest();
+
+		suite = null;
 	});
 
 	it('should return items on the start', function () {
 		var items;
 
-		items = itemsService.getItems();
+		items = suite.itemsService.getItems();
 		expect(items).toBeDefined();
 		expect(items.length).toBe(0);
 
-		$httpBackend.expectGET('/items');
-		$httpBackend.flush();
+		suite.$httpBackend.expectGET('/items');
+		suite.$httpBackend.flush();
 
-		items = itemsService.getItems();
+		items = suite.itemsService.getItems();
 		expect(items).toBeDefined();
 		expect(items.length).toBe(2);
 	});
 
 	it('should not change items link after request', function () {
-		var items = itemsService.getItems();
+		var items = suite.itemsService.getItems();
 
-		$httpBackend.flush();
-		expect(itemsService.getItems()).toBe(items);
+		suite.$httpBackend.flush();
+		expect(suite.itemsService.getItems()).toBe(items);
 	});
 });

@@ -1,35 +1,40 @@
 'use strict';
 
 describe('advertisingDirective', function () {
-	var element, scope, contents,
-		$timeout;
+	var suite;
 
 	beforeEach(module('app', function($provide){
 		$provide.value('i18nFilter', function(){ return 'Adv'; } );
 	}));
 
 	beforeEach(inject(function ($rootScope, $compile, _$timeout_, $filter) {
-		scope = $rootScope.$new();
-		scope.index = 1;
+		suite = {};
+		suite.scope = $rootScope.$new();
+		suite.scope.index = 1;
 
-		element = '<div><div advertising>{{index}}</div></div>';
-		element = $compile(element)(scope);
+		suite.element = '<div><div advertising>{{index}}</div></div>';
+		suite.element = $compile(suite.element)(suite.scope);
 
-		scope.$digest();
-		$timeout = _$timeout_;
+		suite.scope.$digest();
+		suite.$timeout = _$timeout_;
 	}));
 
+	afterEach(function(){
+		suite.element.remove();
+		suite = null;
+	});
+
 	it('should have advertising at the beginning', function () {
-		expect(element.contents()[1].innerText).toEqual('Adv');
+		expect(suite.element.contents()[1].innerText).toEqual('Adv');
 	});
 
 	it('should have advertising till 2nd second', function () {
-		$timeout.flush(1999);
-		expect(element.contents()[1].innerText).toEqual('Adv');
+		suite.$timeout.flush(1999);
+		expect(suite.element.contents()[1].innerText).toEqual('Adv');
 	});
 
 	it('should  have initial text after 2 seconds', function () {
-		$timeout.flush(2000);
-		expect(element.contents()[1].innerText).toEqual('1');
+		suite.$timeout.flush(2000);
+		expect(suite.element.contents()[1].innerText).toEqual('1');
 	});
 });

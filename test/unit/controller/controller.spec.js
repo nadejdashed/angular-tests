@@ -1,8 +1,7 @@
 'use strict';
 
 describe('appController', function () {
-	var $scope,
-		appController;
+	var suite = null;
 
 	beforeEach(module('app'));
 
@@ -24,67 +23,72 @@ describe('appController', function () {
 			}
 		};
 
-		$scope = $rootScope.$new();
-		appController = $controller('appController', {
+		suite = {};
+		suite.$scope = $rootScope.$new();
+		suite.appController = $controller('appController', {
 			itemsService: itemsService,
-			$scope: $scope
+			$scope: suite.$scope
 		});
-		$scope.$apply();
+		suite.$scope.$apply();
 	}));
 
+	afterEach(function(){
+		suite = null;
+	});
+
 	it('should add new item to list with false done status', function () {
-		var length = $scope.items.length,
+		var length = suite.$scope.items.length,
 			text = 'New task';
 
-		$scope.newItem = text;
-		$scope.add();
+		suite.$scope.newItem = text;
+		suite.$scope.add();
 
-		expect($scope.items.length).toBe(length + 1); // compares with ===
-		expect($scope.items[length].text).toEqual(text); // simple literals and variables and for objects
-		expect($scope.items[length].done).toBeFalsy();
+		expect(suite.$scope.items.length).toBe(length + 1); // compares with ===
+		expect(suite.$scope.items[length].text).toEqual(text); // simple literals and variables and for objects
+		expect(suite.$scope.items[length].done).toBeFalsy();
 	});
 
 	it('should clear text field after adding new item', function () {
-		$scope.newItem = 'New task';
-		$scope.add();
+		suite.$scope.newItem = 'New task';
+		suite.$scope.add();
 
-		expect($scope.newItem).toBe('');
+		expect(suite.$scope.newItem).toBe('');
 	});
 
 	it('should remove item from list', function () {
 		var ind = 0,
-			length = $scope.items.length,
-			item = $scope.items[ind];
+			length = suite.$scope.items.length,
+			item = suite.$scope.items[ind];
 
-		$scope.remove(ind);
+		suite.$scope.remove(ind);
 
-		expect($scope.items.length).toBe(length - 1);
-		expect($scope.items[ind]).not.toBe(item);
+		expect(suite.$scope.items.length).toBe(length - 1);
+		expect(suite.$scope.items[ind]).not.toBe(item);
 	});
 
 	it('should set done to not completed item', function () {
 		var ind = 0;
 
-		$scope.complete(ind);
-		expect($scope.items[ind].done).toBeTruthy();
+		suite.$scope.complete(ind);
+		expect(suite.$scope.items[ind].done).toBeTruthy();
 	});
 
 	it('should not change item status if task already completed', function () {
 		var ind = 0;
 
-		$scope.complete(ind);
-		expect($scope.items[ind].done).toBeTruthy();
-		$scope.complete(ind);
-		expect($scope.items[ind].done).toBeTruthy();
+		suite.$scope.complete(ind);
+		expect(suite.$scope.items[ind].done).toBeTruthy();
+		suite.$scope.complete(ind);
+		expect(suite.$scope.items[ind].done).toBeTruthy();
 	});
 
 	it('should remove all done tasks', function () {
-		$scope.items[0].done = true;
-		$scope.items.push({done: true});
-		expect($scope.items.length).toBe(3);
+		suite.$scope.items[0].done = true;
+		suite.$scope.items.push({done: true});
+		expect(suite.$scope.items.length).toBe(3);
 
-		$scope.reset();
-		expect($scope.items.length).toBe(1);
-		expect($scope.items[0].done).toBeFalsy();
+		suite.$scope.reset();
+		expect(suite.$scope.items.length).toBe(1);
+		expect(suite.$scope.items[0].done).toBeFalsy();
 	});
 });

@@ -1,24 +1,30 @@
 'use strict';
 
 describe('advertisingDirective', function () {
-	var element, scope, isolatedScope;
+	var suite;
 
 	beforeEach(module('app'));
 
 	beforeEach(inject(function ($rootScope, $compile) {
-		scope = $rootScope.$new();
-		element = '<div panel header="Temp"><div>Test</div></div>';
-		element = $compile(element)(scope);
-		isolatedScope = element.isolateScope();
-		scope.$digest();
+		suite = {};
+		suite.scope = $rootScope.$new();
+		suite.element = '<div panel header="Temp"><div>Test</div></div>';
+		suite.element = $compile(suite.element)(suite.scope);
+		suite.isolatedScope = suite.element.isolateScope();
+		suite.scope.$digest();
 	}));
 
+	afterEach(function(){
+		suite.element.remove();
+		suite = null;
+	});
+
 	it('should contain header with text Temp', function () {
-		expect(isolatedScope.header).toBe('Temp');
-		expect(element[0].querySelector('.panel-header').innerText).toEqual('Temp');
+		expect(suite.isolatedScope.header).toBe('Temp');
+		expect(suite.element[0].querySelector('.panel-header').innerText).toEqual('Temp');
 	});
 
 	it('should contain body with text Test', function () {
-		expect(element[0].querySelector('.panel-body').innerText).toEqual('Test');
+		expect(suite.element[0].querySelector('.panel-body').innerText).toEqual('Test');
 	});
 });

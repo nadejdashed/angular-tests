@@ -1,21 +1,26 @@
 'use strict';
 
 describe('magicButtonDirective', function () {
-	var element, scope, elementScope,
-		$compile;
+	var suite;
 
 	beforeEach(module('app'));
 
 	beforeEach(inject(function ($rootScope, _$compile_) {
-		scope = $rootScope.$new();
-		$compile = _$compile_;
+		suite = {};
+		suite.scope = $rootScope.$new();
+		suite.$compile = _$compile_;
 	}));
 
+	afterEach(function(){
+		suite.element.remove();
+		suite = null;
+	});
+
 	function createDirective(booleanValue){
-		element = '<button magic-button="'+ booleanValue +'"></button>';
-		element = $compile(element)(scope);
-		elementScope = element.scope();
-		scope.$digest();
+		suite.element = '<button magic-button="'+ booleanValue +'"></button>';
+		suite.element = suite.$compile(suite.element)(suite.scope);
+		suite.elementScope = suite.element.scope();
+		suite.scope.$digest();
 	}
 
 	// Used to simulate DOM event
@@ -27,28 +32,28 @@ describe('magicButtonDirective', function () {
 
 	it('should have class magic button and should have text "Catch" if attribute is true', function () {
 		createDirective(true);
-		expect(element.hasClass('magic-button')).toBeTruthy();
-		expect(elementScope.buttonText).toBe('Catch');
+		expect(suite.element.hasClass('magic-button')).toBeTruthy();
+		expect(suite.elementScope.buttonText).toBe('Catch');
 	});
 
 	it('should not have class magic button and should have text "Add" if attribute is false or empty', function () {
 		createDirective(false);
-		expect(element.hasClass('magic-button')).toBeFalsy();
-		expect(elementScope.buttonText).toBe('Add');
+		expect(suite.element.hasClass('magic-button')).toBeFalsy();
+		expect(suite.elementScope.buttonText).toBe('Add');
 
 		createDirective();
-		expect(element.hasClass('magic-button')).toBeFalsy();
-		expect(elementScope.buttonText).toBe('Add');
+		expect(suite.element.hasClass('magic-button')).toBeFalsy();
+		expect(suite.elementScope.buttonText).toBe('Add');
 	});
 
 	it('should change position on mouseover', function(){
 		createDirective(true);
 
-		var elementDOM = element[0],
+		var elementDOM = suite.element[0],
 			top = elementDOM.style.top,
 			left = elementDOM.style.left;
 
-		triggerEvent(element[0], 'mouseover');
+		triggerEvent(suite.element[0], 'mouseover');
 
 		expect(elementDOM.style.top).not.toBe(top);
 		expect(elementDOM.style.left).not.toBe(left);

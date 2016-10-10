@@ -18,7 +18,7 @@ describe('languagesDirective', function () {
 		i18nService.getLanguages = function () { return $q.resolve(['en', 'fr']); }
 
 		scope = $rootScope.$new();
-		element = '<languages></languages>';
+		element = '<languages value="l"></languages>';
 		element = $compile(element)(scope);
 		scope.$digest();
 	}));
@@ -37,7 +37,7 @@ describe('languagesDirective', function () {
 	it('should not try to set language if it is empty', function () {
 		var isolateScope = element.isolateScope();
 
-		isolateScope.language = undefined;
+		isolateScope.selectedLanguage = undefined;
 		scope.$apply();
 		expect(i18nService.getLanguage()).toBe('en');
 	});
@@ -45,8 +45,9 @@ describe('languagesDirective', function () {
 	it('should have possibility to set language', function () {
 		var isolateScope = element.isolateScope();
 
-		isolateScope.language = 'fr';
+		isolateScope.selectedLanguage = 'fr';
 		scope.$apply();
 		expect(i18nService.getLanguage()).toBe('fr');
+		expect(scope.l).toBe('fr');
 	});
 });

@@ -4,9 +4,11 @@ describe('advertisingDirective', function () {
 	var element, scope, contents,
 		$timeout;
 
-	beforeEach(module('app'));
+	beforeEach(module('app', function($provide){
+		$provide.value('i18nFilter', function(){ return 'Adv'; } );
+	}));
 
-	beforeEach(inject(function ($rootScope, $compile, _$timeout_) {
+	beforeEach(inject(function ($rootScope, $compile, _$timeout_, $filter) {
 		scope = $rootScope.$new();
 		scope.index = 1;
 
@@ -17,11 +19,13 @@ describe('advertisingDirective', function () {
 		$timeout = _$timeout_;
 	}));
 
-	it('should not have initial text at the beginning', function () {
-		expect(element.contents()[1].innerText).not.toEqual('1');
+	it('should have advertising at the beginning', function () {
+		expect(element.contents()[1].innerText).toEqual('Adv');
+	});
 
+	it('should have advertising till 2nd second', function () {
 		$timeout.flush(1999);
-		expect(element.contents()[1].innerText).not.toEqual('1');
+		expect(element.contents()[1].innerText).toEqual('Adv');
 	});
 
 	it('should  have initial text after 2 seconds', function () {

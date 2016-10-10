@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('appDemo')
+angular.module('mock')
 	.value('items', [
 		{
 			done: false,
@@ -13,15 +13,23 @@ angular.module('appDemo')
 	])
 	.value('translations', {
 		en: {
+			'Results': 'Results',
 			'Remove': 'Remove',
 			'Add': 'Add',
 			'Catch': 'Catch me',
-			'Adv': 'Advertising'
+			'Adv': 'Advertising',
+			'Reset': 'Reset done task',
+			'Done': 'Done',
+			'Left': 'Left'
 		},
 		ru: {
+			'Results': 'Результаты',
 			'Remove': 'Удалить',
 			'Add': 'Добавить',
 			'Catch': 'Споймай меня',
-			'Adv': 'Реклама'
+			'Adv': 'Реклама',
+			'Reset': 'Обнулить сделанные задания',
+			'Done': 'Сделано',
+			'Left': 'Осталось'
 		}
 	});

@@ -6,7 +6,9 @@ angular.module('app').directive('languages', ['i18nService', function (i18nServi
 	return {
 		restrict: 'E',
 		template: '<select ng-model="selectedLanguage" ng-options="language for language in languages"></select>',
-		scope: {},
+		scope: {
+			selectedLanguage: '=?value'
+		},
 		link: function (scope) {
 			i18nService.getLanguages().then(function(value){
 				scope.selectedLanguage = i18nService.getLanguage();

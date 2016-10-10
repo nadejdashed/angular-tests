@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').service('i18nService', ['$http', '$timeout', function ($http, $timeout) {
+angular.module('app').service('i18nService', ['$http', function ($http) {
 	var promise,
 		languages = [],
 		language,
@@ -12,15 +12,15 @@ angular.module('app').service('i18nService', ['$http', '$timeout', function ($ht
 		},
 		setLanguage: function(lang) {
 			if (lang && texts[lang]) {
-				console.log(lang);
 				language = lang;
 			}
 		},
 		getLanguages: function () {
 			return promise || requestLanguages();
 		},
-		getText: function (text) {
-			return texts && texts[language][text] ? texts[language][text] : '';
+		getText: function (text, requestedLanguage) {
+			var l = requestedLanguage || language;
+			return texts && texts[l][text] ? texts[l][text] : '';
 		}
 	};
 

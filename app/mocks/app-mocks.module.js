@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('appDemo', ['ngMockE2E']).run(function ($httpBackend, items, translations) {
+angular.module('mock', ['ngMockE2E']).run(function ($httpBackend, items, translations) {
 	var DebugMode = true;
 
 	if (DebugMode) {
@@ -12,4 +12,4 @@ angular.module('appDemo', ['ngMockE2E']).run(function ($httpBackend, items, tran
 	}
 });
 
-angular.module('app').requires.push('appDemo');
+angular.module('app').requires.push('mock');

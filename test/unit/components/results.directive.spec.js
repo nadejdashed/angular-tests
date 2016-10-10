@@ -13,7 +13,7 @@ describe('resultsDirective', function () {
 		spyOn(bindings, 'clearFunction');
 	}));
 
-	it('should not call clear function if none done tasks', function () {
+	it('should not call clear function if no tasks are completed', function () {
 		ctrl = $componentController('results', null, bindings);
 		ctrl.reset();
 		expect(bindings.clearFunction).not.toHaveBeenCalled();

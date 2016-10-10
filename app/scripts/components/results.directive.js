@@ -1,8 +1,9 @@
 'use strict';
 
 angular.module('app').component('results', {
-	templateUrl: '/templates/results.html',
+	templateUrl: '/scripts/components/results.html',
 	bindings: {
+		l: '=lang',
 		all: '=',
 		done: '=',
 		clearFunction: '&'

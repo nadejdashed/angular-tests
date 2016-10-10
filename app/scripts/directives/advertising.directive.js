@@ -13,7 +13,7 @@ angular.module('app').directive('advertising', function ($timeout, $compile, i18
 				transcludeFn(scope, function(clone){
 					element.after(clone);
 				});
-			}, 20000);
+			}, 2000);
 
 			scope.getLang = i18nService.getLanguage;
 		}

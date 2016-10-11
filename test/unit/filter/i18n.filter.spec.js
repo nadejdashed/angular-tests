@@ -6,10 +6,9 @@ describe('i18nFilter', function () {
 	beforeEach(module('app', function ($provide) {
 		suite = {};
 		suite.i18nService = {
-			getText: function () {
-			}
+			getText: function () { }
 		};
-		spyOn(suite.i18nService, 'getText').andReturn('test');
+		spyOn(suite.i18nService, 'getText').and.returnValue('test');
 		$provide.value('i18nService', suite.i18nService);
 	}));
 

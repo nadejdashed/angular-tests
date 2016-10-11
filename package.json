@@ -9,9 +9,11 @@
   },
   "devDependencies": {
     "coveralls": "^2.11.14",
+    "jasmine-core": "^2.5.2",
+    "karma": "^0.12.37",
     "karma-chrome-launcher": "~0.1.4",
     "karma-coverage": "^1.1.1",
-    "karma-jasmine": "~0.1.5",
+    "karma-jasmine": "^1.0.2",
     "karma-ng-html2js-preprocessor": "^1.0.0",
     "karma-phantomjs-launcher": "^1.0.2",
     "karma-phantomjs2-launcher": "^0.5.0"
@@ -20,7 +22,7 @@
     "test": "karma start",
     "test-local": "karma start --browsers PhantomJS2 --single-run false",
     "test-debug": "karma start --browsers Chrome --single-run false --debug",
-	"coveralls": "cat ./coverage/report-lcov/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+    "coveralls": "cat ./coverage/report-lcov/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "author": "",
   "license": "BSD"

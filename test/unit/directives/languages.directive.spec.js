@@ -3,7 +3,8 @@
 describe('languagesDirective', function () {
 	var suite;
 
-	beforeEach(module('app', function ($provide) {
+	module.sharedInjector();
+	beforeAll(module('app', function ($provide) {
 		var lang = 'en';
 		suite = {};
 		suite.i18nService = {
@@ -14,7 +15,7 @@ describe('languagesDirective', function () {
 		$provide.value('i18nService', suite.i18nService);
 	}));
 
-	beforeEach(inject(function ($rootScope, $compile, $q) {
+	beforeAll(inject(function ($rootScope, $compile, $q) {
 		suite.i18nService.getLanguages = function () { return $q.resolve(['en', 'fr']); }
 
 		suite.scope = $rootScope.$new();
@@ -23,7 +24,7 @@ describe('languagesDirective', function () {
 		suite.scope.$digest();
 	}));
 
-	afterEach(function(){
+	afterAll(function(){
 		suite.element.remove();
 		suite = null;
 	});

@@ -1,22 +1,23 @@
 'use strict';
 
 describe('resultsDirective', function () {
-	var suite = null;
+	var suite = {};
 
-	beforeEach(module('app'));
+	module.sharedInjector();
+	beforeAll(module('app'));
 
-	beforeEach(inject(function (_$componentController_) {
-		suite = {};
+	beforeAll(inject(function (_$componentController_) {
 		suite.$componentController = _$componentController_;
-		suite.bindings = {done:0, clearFunction: function(){}};
+		suite.bindings = {clearFunction: function(){}};
 		spyOn(suite.bindings, 'clearFunction');
 	}));
 
-	afterEach(function(){
+	afterAll(function(){
 		suite = null;
 	});
 
 	it('should not call clear function if no tasks are completed', function () {
+		suite.bindings.done = 0;
 		var ctrl = suite.$componentController('results', null, suite.bindings);
 		ctrl.reset();
 		expect(suite.bindings.clearFunction).not.toHaveBeenCalled();

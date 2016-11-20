@@ -1,6 +1,6 @@
 'use strict';
 
-describe('advertisingDirective', function () {
+describe('panelDirective', function () {
 	var suite;
 
 	beforeEach(module('app'));
@@ -8,15 +8,23 @@ describe('advertisingDirective', function () {
 	beforeEach(inject(function ($rootScope, $compile) {
 		suite = {};
 		suite.scope = $rootScope.$new();
-		suite.element = '<div panel header="Temp"><div>Test</div></div>';
+		suite.element = '<div panels><div panel header="Temp"><div>Test</div></div></div>';
 		suite.element = $compile(suite.element)(suite.scope);
-		suite.isolatedScope = suite.element.isolateScope();
+
+		suite.panelsController = suite.element.controller('panels');
+		spyOn(suite.panelsController, 'addPanel');
+
+		suite.isolatedScope = angular.element(suite.element[0].querySelector('[panel]')).isolateScope();
 		suite.scope.$digest();
 	}));
 
 	afterEach(function(){
 		suite.element.remove();
 		suite = null;
+	});
+
+	it('should add panel in list of panels', function () {
+		expect(suite.panelsController).toHaveBeenCalled();
 	});
 
 	it('should contain header with text Temp', function () {

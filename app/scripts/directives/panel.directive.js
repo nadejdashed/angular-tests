@@ -3,6 +3,7 @@
 angular.module('app').directive('panel', function () {
 	return {
 		transclude: true,
+		require: "^panels",
 		scope: {
 			header: '@'
 		},
@@ -10,6 +11,9 @@ angular.module('app').directive('panel', function () {
 			'<div class="panel">' +
 			'    <div class="panel-header">{{header}}</div>' +
 			'    <div ng-transclude class="panel-body"></div>' +
-			'<div>'
+			'<div>',
+		link: function(scope, element, attrs, controller) {
+			controller.addPanel();
+		}
 	};
 });

@@ -39,9 +39,11 @@
 <div class="wrapper" ng-controller="appController">
 	<languages value="l"></languages>
 	<div advertising>
-		<panel header="{{'Results' | i18n:l}}">
-			<results all="items.length" done="(items | filter:{done: true}).length" clear-function="reset()" lang="l"></results>
-		</panel>
+		<panels>
+			<panel header="{{'Results' | i18n:l}}">
+				<results all="items.length" done="(items | filter:{done: true}).length" clear-function="reset()" lang="l"></results>
+			</panel>
+		</panels>
 		<ul>
 			<li ng-repeat="item in items">
 				<span ng-class="{done: item.done}" ng-click="complete($index)">{{item.text}}</span>
@@ -63,6 +65,7 @@
 <script src="scripts/directives/languages.directive.js"></script>
 <script src="scripts/directives/magic-button.directive.js"></script>
 <script src="scripts/directives/advertising.directive.js"></script>
+<script src="scripts/directives/panels.directive.js"></script>
 <script src="scripts/directives/panel.directive.js"></script>
 <script src="scripts/components/results.directive.js"></script>
 

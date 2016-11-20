@@ -20,7 +20,8 @@ angular.module('mock')
 			'Adv': 'Advertising',
 			'Reset': 'Reset done task',
 			'Done': 'Done',
-			'Left': 'Left'
+			'Left': 'Left',
+			'Panel': 'Count of panels: '
 		},
 		ru: {
 			'Results': 'Результаты',
@@ -30,6 +31,7 @@ angular.module('mock')
 			'Adv': 'Реклама',
 			'Reset': 'Обнулить сделанные задания',
 			'Done': 'Сделано',
-			'Left': 'Осталось'
+			'Left': 'Осталось',
+			'Panel': 'Количество панелей: '
 		}
 	});

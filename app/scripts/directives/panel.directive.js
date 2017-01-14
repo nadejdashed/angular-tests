@@ -14,6 +14,9 @@ angular.module('app').directive('panel', function () {
 			'<div>',
 		link: function(scope, element, attrs, controller) {
 			controller.addPanel();
+		},
+		controller: function() {
+			this.doS = 'a';
 		}
 	};
 });

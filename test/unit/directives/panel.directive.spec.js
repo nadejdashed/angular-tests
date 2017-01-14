@@ -8,11 +8,13 @@ describe('panelDirective', function () {
 	beforeEach(inject(function ($rootScope, $compile) {
 		suite = {};
 		suite.scope = $rootScope.$new();
-		suite.element = '<div panels><div panel header="Temp"><div>Test</div></div></div>';
-		suite.element = $compile(suite.element)(suite.scope);
 
+		suite.element = '<div panels></div>';
+		suite.element = $compile(suite.element)(suite.scope);
 		suite.panelsController = suite.element.controller('panels');
 		spyOn(suite.panelsController, 'addPanel');
+
+		suite.element.after($compile('<div panel header="Temp"><div>Test</div></div>'));
 
 		suite.isolatedScope = angular.element(suite.element[0].querySelector('[panel]')).isolateScope();
 		suite.scope.$digest();
@@ -24,7 +26,7 @@ describe('panelDirective', function () {
 	});
 
 	it('should add panel in list of panels', function () {
-		expect(suite.panelsController).toHaveBeenCalled();
+		expect(suite.panelsController.addPanel).toHaveBeenCalled();
 	});
 
 	it('should contain header with text Temp', function () {

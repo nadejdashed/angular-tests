@@ -8,6 +8,12 @@
 			width: 500px;
 			margin: 20px auto;
 		}
+		.footer {
+			position:fixed;
+			text-align: center;
+			width: 100%;
+			bottom:0;
+		}
 
 		.done {
 			color: green;
@@ -32,6 +38,10 @@
 			background: ghostwhite;
 			border-bottom: 1px solid black;
 		}
+
+		.big {
+			transform: scale(2);
+		}
 	</style>
 </head>
 <body>
@@ -54,6 +64,9 @@
 		<button ng-click="add()" magic-button="{{items.length > 3}}">{{buttonText | i18n:l}}</button>
 	</div>
 </div>
+<div class="footer">
+	<div big-button></div>
+</div>
 
 <script src="resources/angular.js"></script>
 <!--<script src="https://code.angularjs.org/1.2.30/angular.js"></script>-->
@@ -67,6 +80,7 @@
 <script src="scripts/directives/advertising.directive.js"></script>
 <script src="scripts/directives/panels.directive.js"></script>
 <script src="scripts/directives/panel.directive.js"></script>
+<script src="scripts/directives/big-button.directive.js"></script>
 <script src="scripts/components/results.directive.js"></script>
 
 <script src="resources/angular-mocks.js"></script>

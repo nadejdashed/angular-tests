@@ -13,6 +13,9 @@ module.exports = {
         loaders: [{
             test: /\.js$/,
             loader: 'babel'
+        }, {
+           test: /\.html$/,
+            loader: 'raw'
         }]
     }
 };

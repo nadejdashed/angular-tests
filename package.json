@@ -23,6 +23,8 @@
     "karma-ng-html2js-preprocessor": "^1.0.0",
     "karma-phantomjs-launcher": "^1.0.2",
     "karma-phantomjs2-launcher": "^0.5.0",
+    "karma-webpack": "^2.0.1",
+    "raw-loader": "^0.5.1",
     "webpack": "^1.13.1"
   },
   "scripts": {

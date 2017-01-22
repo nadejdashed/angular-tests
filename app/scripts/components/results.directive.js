@@ -1,7 +1,7 @@
 'use strict';
 
 var ResultsDirective = {
-	templateUrl: '/app/scripts/components/results.html',
+	template: require('./results.html'),
 	bindings: {
 		l: '=lang',
 		all: '=',

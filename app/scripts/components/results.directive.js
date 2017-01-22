@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('app').component('results', {
-	templateUrl: '/scripts/components/results.html',
+var ResultsDirective = {
+	templateUrl: '/app/scripts/components/results.html',
 	bindings: {
 		l: '=lang',
 		all: '=',
@@ -17,4 +17,6 @@ angular.module('app').component('results', {
 			}
 		}
 	}
-});
+};
+
+export default ResultsDirective;

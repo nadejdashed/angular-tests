@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').directive('bigButton', function ($document) {
+var BigButtonDirective = function ($document) {
 	return {
 		replace:true,
 		template: '<button ng-class="{big: isBigButton}" ng-click="onClick()">Big Button</button>',
@@ -25,4 +25,6 @@ angular.module('app').directive('bigButton', function ($document) {
 			}
 		}
 	};
-});
+};
+
+export default BigButtonDirective;

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').directive('panel', function () {
+var PanelDirective = function () {
 	return {
 		transclude: true,
 		require: "^panels",
@@ -8,10 +8,10 @@ angular.module('app').directive('panel', function () {
 			header: '@'
 		},
 		template:
-			'<div class="panel">' +
-			'    <div class="panel-header">{{header}}</div>' +
-			'    <div ng-transclude class="panel-body"></div>' +
-			'<div>',
+		'<div class="panel">' +
+		'    <div class="panel-header">{{header}}</div>' +
+		'    <div ng-transclude class="panel-body"></div>' +
+		'<div>',
 		link: function(scope, element, attrs, controller) {
 			controller.addPanel();
 		},
@@ -19,4 +19,6 @@ angular.module('app').directive('panel', function () {
 			this.doS = 'a';
 		}
 	};
-});
+};
+
+export default PanelDirective;

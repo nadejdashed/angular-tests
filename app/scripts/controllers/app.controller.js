@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').controller('appController', ['$scope', 'itemsService', function ($scope, itemsService) {
+var AppController = ['$scope', 'itemsService', function ($scope, itemsService) {
 	$scope.items = itemsService.getItems();
 	$scope.newItem = '';
 
@@ -30,4 +30,6 @@ angular.module('app').controller('appController', ['$scope', 'itemsService', fun
             }
         }
 	};
-}]);
+}];
+
+export default AppController;

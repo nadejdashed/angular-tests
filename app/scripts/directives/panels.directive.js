@@ -1,11 +1,11 @@
 'use strict';
 
-angular.module('app').directive('panels', function () {
+var PanelsDirective = function () {
 	return {
 		transclude: true,
 		template:
-			'<h2>{{"Panel" | i18n:l}}{{count}}</h2>' +
-			'<div ng-transclude></div>',
+		'<h2>{{"Panel" | i18n:l}}{{count}}</h2>' +
+		'<div ng-transclude></div>',
 		controller: function($scope) {
 			$scope.count = 0;
 
@@ -14,4 +14,6 @@ angular.module('app').directive('panels', function () {
 			}
 		}
 	};
-});
+};
+
+export default PanelsDirective;

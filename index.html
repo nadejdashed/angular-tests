@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+	<title>Angular testing</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<style>
+		.wrapper {
+			width: 500px;
+			margin: 20px auto;
+		}
+		.footer {
+			position:fixed;
+			text-align: center;
+			width: 100%;
+			bottom:0;
+		}
+
+		.done {
+			color: green;
+			text-decoration: line-through;
+		}
+
+		span {
+			display: inline-block;
+			width: 200px;
+		}
+
+		.magic-button {
+			position: relative;
+		}
+
+		.panel {
+			border: 1px solid black;
+			margin: 10px 0;
+		}
+
+		.panel-header {
+			background: ghostwhite;
+			border-bottom: 1px solid black;
+		}
+
+		.big {
+			transform: scale(2);
+		}
+	</style>
+</head>
+<body>
+
+<div class="wrapper" ng-controller="appController">
+	<languages value="l"></languages>
+	<div advertising>
+		<panels>
+			<panel header="{{'Results' | i18n:l}}">
+				<results all="items.length" done="(items | filter:{done: true}).length" clear-function="reset()" lang="l"></results>
+			</panel>
+		</panels>
+		<ul>
+			<li ng-repeat="item in items">
+				<span ng-class="{done: item.done}" ng-click="complete($index)">{{item.text}}</span>
+				<a ng-click="remove($index)">{{'Remove' | i18n:l}}</a>
+			</li>
+		</ul>
+		<input type="text" ng-model="newItem"/>
+		<button ng-click="add()" magic-button="{{items.length > 3}}">{{buttonText | i18n:l}}</button>
+	</div>
+</div>
+<div class="footer">
+	<div big-button></div>
+</div>
+
+<script src="dist/bundle.js"></script>
+<script src="dist/mock.js"></script>
+
+</body>
+</html>

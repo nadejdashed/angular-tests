@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').directive('advertising', function ($timeout, $compile, i18nService) {
+var AdvertisingDirective = function ($timeout, $compile, i18nService) {
 	return {
 		transclude: 'element',
 		link: function (scope, element, attr, ctrl, transcludeFn) {
@@ -18,4 +18,6 @@ angular.module('app').directive('advertising', function ($timeout, $compile, i18
 			scope.getLang = i18nService.getLanguage;
 		}
 	};
-});
+};
+
+export default AdvertisingDirective;

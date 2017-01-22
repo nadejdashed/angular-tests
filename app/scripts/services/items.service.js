@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').service('itemsService', ['$http', function ($http) {
+var ItemsService = ['$http', function ($http) {
 	var promise,
 		items = [];
 
@@ -16,4 +16,6 @@ angular.module('app').service('itemsService', ['$http', function ($http) {
 			Array.prototype.push.apply(items, response.data);
 		});
 	}
-}]);
+}];
+
+export default ItemsService;

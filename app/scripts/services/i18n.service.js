@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').service('i18nService', ['$http', function ($http) {
+var I18nService = ['$http', function ($http) {
 	var promise,
 		languages = [],
 		language,
@@ -36,4 +36,6 @@ angular.module('app').service('i18nService', ['$http', function ($http) {
 		});
 		return promise;
 	}
-}]);
+}];
+
+export default I18nService;

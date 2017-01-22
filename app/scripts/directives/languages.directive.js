@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').directive('languages', ['i18nService', function (i18nService) {
+var LanguagesDirective = ['i18nService', function (i18nService) {
 	var promise;
 
 	return {
@@ -20,4 +20,6 @@ angular.module('app').directive('languages', ['i18nService', function (i18nServi
 			});
 		}
 	};
-}]);
+}];
+
+export default LanguagesDirective;

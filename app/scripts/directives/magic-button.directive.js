@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').directive('magicButton', function () {
+var MagicButtonDirective = function () {
 	return {
 		//scope: true,
 		link: function (scope, element, attr) {
@@ -31,4 +31,6 @@ angular.module('app').directive('magicButton', function () {
 			});
 		}
 	};
-});
+};
+
+export default MagicButtonDirective;

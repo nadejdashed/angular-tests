@@ -1,4 +1,7 @@
-'use strict';
+import "angular";
+import "angular-mocks";
+
+import {Items, Translations} from "./data-mocks.module";
 
 angular.module('mock', ['ngMockE2E']).run(function ($httpBackend, items, translations) {
 	var DebugMode = true;
@@ -10,6 +13,8 @@ angular.module('mock', ['ngMockE2E']).run(function ($httpBackend, items, transla
 	} else {
 		$httpBackend.whenGET(/^.*$/).passThrough();
 	}
-});
+})
+	.value('items', Items)
+	.value('translations', Translations);
 
 angular.module('app').requires.push('mock');

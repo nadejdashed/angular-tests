@@ -1,5 +1,3 @@
-'use strict';
-
 import angular from 'angular';
 
 import ResultsDirective from "./components/results.directive";
@@ -14,7 +12,7 @@ import I18nFilter from "./filters/i18n.filter";
 import I18nService from "./services/i18n.service";
 import ItemsService from "./services/items.service";
 
-angular.module('app', [])
+export default angular.module('app', [])
     .component('results', ResultsDirective)
     .controller('appController', AppController)
     .directive('advertising', AdvertisingDirective)
@@ -25,4 +23,5 @@ angular.module('app', [])
     .directive('panels', PanelsDirective)
     .filter('i18n', I18nFilter)
     .service('i18nService', I18nService)
-    .service('itemsService', ItemsService);
+    .service('itemsService', ItemsService)
+    .name;

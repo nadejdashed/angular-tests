@@ -24,20 +24,25 @@ module.exports = function (config) {
 
 		// list of files / patterns to load in the browser
 		files: [
-			'app/resources/angular.js',
-			'app/resources/angular-mocks.js',
-			'app/scripts/**/*.module.js',
-			'app/scripts/**/*.js',
-			'test/unit/**/*.js',
-			'app/templates/**/*.html'
+			'app/scripts/tests.webpack.js'
+			//'app/templates/**/*.html'
 		],
 
 
 		// preprocess matching files before serving them to the browser
 		// available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
 		preprocessors: {
-			'app/scripts/**/*.js': sourcePreprocessors,
-			'app/templates/**/*.html': ['ng-html2js']
+			'app/scripts/tests.webpack.js': ['webpack', 'sourcemap']
+			//'app/scripts/**/*.js': sourcePreprocessors,
+			//'app/templates/**/*.html': ['ng-html2js']
+		},
+
+
+		webpack: require('./webpack-test.config'),
+
+
+		webpackMiddleware: {
+			noInfo: true
 		},
 
 

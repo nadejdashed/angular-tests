@@ -1,22 +1,23 @@
-'use strict';
+import appName from '../app.module';
 
-describe('languagesDirective', function () {
-	var suite;
+describe('languagesDirective', () => {
+	let suite;
 
-	module.sharedInjector();
-	beforeAll(module('app', function ($provide) {
+	angular.mock.module.sharedInjector();
+
+	beforeAll(angular.mock.module(appName, ($provide) => {
 		var lang = 'en';
 		suite = {};
 		suite.i18nService = {
-			setLanguage: function(l) { lang = l; },
-			getLanguage: function() { return lang; }
+			setLanguage: (l) => { lang = l; },
+			getLanguage: () => { return lang; }
 		};
 
 		$provide.value('i18nService', suite.i18nService);
 	}));
 
-	beforeAll(inject(function ($rootScope, $compile, $q) {
-		suite.i18nService.getLanguages = function () { return $q.resolve(['en', 'fr']); }
+	beforeAll(angular.mock.inject(($rootScope, $compile, $q) => {
+		suite.i18nService.getLanguages = () => $q.resolve(['en', 'fr']);
 
 		suite.scope = $rootScope.$new();
 		suite.element = '<languages value="l"></languages>';
@@ -24,23 +25,23 @@ describe('languagesDirective', function () {
 		suite.scope.$digest();
 	}));
 
-	afterAll(function(){
+	afterAll(() => {
 		suite.element.remove();
 		suite = null;
 	});
 
-	it('should contains all languages', function () {
+	it('should contains all languages', () => {
 		var isolateScope = suite.element.isolateScope();
 		expect(isolateScope.languages).toEqual(['en', 'fr']);
 	});
 
-	it('should receive default language', function () {
+	it('should receive default language', () => {
 		var isolateScope = suite.element.isolateScope();
 
 		expect(isolateScope.selectedLanguage).toBe('en');
 	});
 
-	it('should not try to set language if it is empty', function () {
+	it('should not try to set language if it is empty', () => {
 		var isolateScope = suite.element.isolateScope();
 
 		isolateScope.selectedLanguage = undefined;
@@ -48,7 +49,7 @@ describe('languagesDirective', function () {
 		expect(suite.i18nService.getLanguage()).toBe('en');
 	});
 
-	it('should have possibility to set language', function () {
+	it('should have possibility to set language', () => {
 		var isolateScope = suite.element.isolateScope();
 
 		isolateScope.selectedLanguage = 'fr';

@@ -3,7 +3,7 @@ import appName from '../app.module';
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 500;
 
 // Work only with Chrome
-describe('bigButtonDirective', () => {
+xdescribe('bigButtonDirective', () => {
 	let suite;
 
 	beforeEach(angular.mock.module(appName));

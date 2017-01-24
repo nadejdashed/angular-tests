@@ -38,3 +38,4 @@ describe('advertisingDirective', () => {
 		expect(suite.element.contents()[1].innerText).toEqual('1');
 	});
 });
+

@@ -38,3 +38,32 @@ let global = 'smth';
 describe('Your test suite', () => {
 
 });
+
+/* EXAMPLE 4 */
+describe('if configuration is not provided', () => {
+   let injector;
+
+   beforeEach(angular.mock.inject(($injector) => {
+       let pageConfig = $injector.get('shopPageConfig');
+       pageConfig.serviceUrl = undefined;
+       injector = $injector;
+   }));
+
+   it('should throw error', () => {
+       expect(() => {
+           injector.get('vehicleData')
+       }).toThrow();
+   })
+});
+
+/* EXAMPLE 5 */
+it('should work without any validation of selected flights', () => {
+   resultsDataService.setRequestObj(fixedData.requestData);
+   deferred.resolve(fixedData.responseData);
+   $rootScrope.$apply();
+
+   resultsDataService.submit();
+   expect(setFlightSpy).toHaveBeenCalledWith(
+       jasmine.objectContaining({finalSelection: true})
+   );
+});

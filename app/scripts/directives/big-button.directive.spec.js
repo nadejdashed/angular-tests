@@ -1,13 +1,14 @@
-'use strict';
+import appName from '../app.module';
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 500;
 
-fdescribe('bigButtonDirective', function () {
-	var suite;
+// Work only with Chrome
+describe('bigButtonDirective', () => {
+	let suite;
 
-	beforeEach(module('app'));
+	beforeEach(angular.mock.module(appName));
 
-	beforeEach(inject(function ($rootScope, $compile, $document, $window) {
+	beforeEach(angular.mock.inject(($rootScope, $compile, $document, $window) => {
 		suite = {};
 
 		suite.$window = $window;
@@ -22,40 +23,40 @@ fdescribe('bigButtonDirective', function () {
 		suite.scope.$digest();
 	}));
 
-	afterEach(function(){
-		suite.element.remove();
+	afterEach(() => {
+        suite.element.remove();
 		suite = null;
 	});
 
 	function triggerEvent(elem){
-		var event = document.createEvent('Event');
+		let event = suite.$document[0].createEvent('Event');
 		event.initEvent('scroll');
 		elem.dispatchEvent(event);
 	}
 
-	it('should increase button if scroll to end of the page', function (done) {
+	it('should increase button if scroll to end of the page', (done) => {
 		suite.$document[0].body.scrollTop = 10000;
-		triggerEvent(suite.$document[0].documentElement, 'scroll');
+		triggerEvent(suite.$document[0], 'scroll');
 
-		setTimeout(function() {
+		setTimeout(() => {
 			expect(suite.scope.isBigButton).toBeTruthy();
 			done();
 		}, 0);
 	});
 
-	it('should increase button if scroll is not to the end of the page', function (done) {
+	it('should increase button if scroll is not to the end of the page', (done) => {
 		suite.$document[0].body.scrollTop = 1000;
-		triggerEvent(suite.$document[0].documentElement, 'scroll');
+		triggerEvent(suite.$document[0], 'scroll');
 
-		setTimeout(function() {
+		setTimeout(() => {
 			expect(suite.scope.isBigButton).toBeFalsy();
 			done();
 		}, 0);
 	});
 
-	it('should scroll up after click on the button', function () {
+	it('should scroll up after click on the button', () => {
 		suite.$document[0].body.scrollTop = 1000;
-		triggerEvent(suite.$document[0].documentElement, 'scroll');
+		triggerEvent(suite.$document[0], 'scroll');
 
 		expect(suite.$document[0].body.scrollTop).toBe(1000);
 		suite.scope.onClick();

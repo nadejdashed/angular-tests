@@ -1,17 +1,17 @@
-'use strict';
+import appName from '../app.module';
 
-describe('magicButtonDirective', function () {
-	var suite;
+describe('magicButtonDirective', () => {
+	let suite;
 
-	beforeEach(module('app'));
+	beforeEach(angular.mock.module(appName));
 
-	beforeEach(inject(function ($rootScope, _$compile_) {
+	beforeEach(angular.mock.inject(($rootScope, _$compile_) => {
 		suite = {};
 		suite.scope = $rootScope.$new();
 		suite.$compile = _$compile_;
 	}));
 
-	afterEach(function(){
+	afterEach(() => {
 		suite.element.remove();
 		suite = null;
 	});
@@ -25,18 +25,18 @@ describe('magicButtonDirective', function () {
 
 	// Used to simulate DOM event
 	function triggerEvent(elem, type){
-		var event = document.createEvent('Event');
+		let event = document.createEvent('Event');
 		event.initEvent(type);
 		elem.dispatchEvent(event);
 	}
 
-	it('should have class magic button and should have text "Catch" if attribute is true', function () {
+	it('should have class magic button and should have text "Catch" if attribute is true', () => {
 		createDirective(true);
 		expect(suite.element.hasClass('magic-button')).toBeTruthy();
 		expect(suite.elementScope.buttonText).toBe('Catch');
 	});
 
-	it('should not have class magic button and should have text "Add" if attribute is false or empty', function () {
+	it('should not have class magic button and should have text "Add" if attribute is false or empty', () => {
 		createDirective(false);
 		expect(suite.element.hasClass('magic-button')).toBeFalsy();
 		expect(suite.elementScope.buttonText).toBe('Add');
@@ -46,10 +46,10 @@ describe('magicButtonDirective', function () {
 		expect(suite.elementScope.buttonText).toBe('Add');
 	});
 
-	it('should change position on mouseover', function(){
+	it('should change position on mouseover', () => {
 		createDirective(true);
 
-		var elementDOM = suite.element[0],
+		let elementDOM = suite.element[0],
 			top = elementDOM.style.top,
 			left = elementDOM.style.left;
 

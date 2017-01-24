@@ -22,7 +22,11 @@ var BigButtonDirective = function ($document) {
 
 			scope.onClick = function(){
 				$document[0].body.scrollTop = 0;
-			}
+			};
+
+			scope.$on('$destroy', function () {
+				$document.off('scroll');
+			});
 		}
 	};
 };

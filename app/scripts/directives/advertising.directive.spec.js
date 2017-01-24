@@ -1,13 +1,13 @@
-'use strict';
+import appName from '../app.module';
 
-describe('advertisingDirective', function () {
-	var suite;
+describe('advertisingDirective', () => {
+	let suite;
 
-	beforeEach(module('app', function($provide){
-		$provide.value('i18nFilter', function(){ return 'Adv'; } );
+	beforeEach(angular.mock.module(appName, ($provide) => {
+		$provide.value('i18nFilter', () => 'Adv' );
 	}));
 
-	beforeEach(inject(function ($rootScope, $compile, _$timeout_, $filter) {
+	beforeEach(angular.mock.inject(($rootScope, $compile, _$timeout_, $filter) => {
 		suite = {};
 		suite.scope = $rootScope.$new();
 		suite.scope.index = 1;
@@ -19,21 +19,21 @@ describe('advertisingDirective', function () {
 		suite.$timeout = _$timeout_;
 	}));
 
-	afterEach(function(){
+	afterEach(() => {
 		suite.element.remove();
 		suite = null;
 	});
 
-	it('should have advertising at the beginning', function () {
+	it('should have advertising at the beginning', () => {
 		expect(suite.element.contents()[1].innerText).toEqual('Adv');
 	});
 
-	it('should have advertising till 2nd second', function () {
+	it('should have advertising till 2nd second', () => {
 		suite.$timeout.flush(1999);
 		expect(suite.element.contents()[1].innerText).toEqual('Adv');
 	});
 
-	it('should  have initial text after 2 seconds', function () {
+	it('should  have initial text after 2 seconds', () => {
 		suite.$timeout.flush(2000);
 		expect(suite.element.contents()[1].innerText).toEqual('1');
 	});

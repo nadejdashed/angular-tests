@@ -25,7 +25,6 @@ module.exports = function (config) {
 		// list of files / patterns to load in the browser
 		files: [
 			'app/scripts/tests.webpack.js'
-			//'app/templates/**/*.html'
 		],
 
 
@@ -33,8 +32,7 @@ module.exports = function (config) {
 		// available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
 		preprocessors: {
 			'app/scripts/tests.webpack.js': ['webpack', 'sourcemap']
-			//'app/scripts/**/*.js': sourcePreprocessors,
-			//'app/templates/**/*.html': ['ng-html2js']
+			//'app/scripts/**/*.js': sourcePreprocessors
 		},
 
 
@@ -43,12 +41,6 @@ module.exports = function (config) {
 
 		webpackMiddleware: {
 			noInfo: true
-		},
-
-
-		ngHtml2JsPreprocessor: {
-			stripPrefix: 'app',
-			moduleName: 'templates'
 		},
 
 
@@ -92,7 +84,7 @@ module.exports = function (config) {
 
 		// start these browsers
 		// available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-		browsers: ['PhantomJS'],
+		browsers: ['Chrome'],
 
 
 		// Continuous Integration mode

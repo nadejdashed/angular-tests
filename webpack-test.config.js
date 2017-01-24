@@ -6,6 +6,13 @@ module.exports = {
             test: /\.js$/,
             loader: 'babel'
         }, {
+            test: /\.js$/,
+            exclude: [
+                /node_modules/,
+                /\.spec\.js$/
+            ],
+            loader: 'isparta-instrumenter'
+        }, {
            test: /\.html$/,
             loader: 'raw'
         }]

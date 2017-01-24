@@ -6,11 +6,11 @@ describe('languagesDirective', () => {
 	angular.mock.module.sharedInjector();
 
 	beforeAll(angular.mock.module(appName, ($provide) => {
-		var lang = 'en';
+		let lang = 'en';
 		suite = {};
 		suite.i18nService = {
 			setLanguage: (l) => { lang = l; },
-			getLanguage: () => { return lang; }
+			getLanguage: () => lang
 		};
 
 		$provide.value('i18nService', suite.i18nService);
@@ -31,18 +31,18 @@ describe('languagesDirective', () => {
 	});
 
 	it('should contains all languages', () => {
-		var isolateScope = suite.element.isolateScope();
+		let isolateScope = suite.element.isolateScope();
 		expect(isolateScope.languages).toEqual(['en', 'fr']);
 	});
 
 	it('should receive default language', () => {
-		var isolateScope = suite.element.isolateScope();
+		let isolateScope = suite.element.isolateScope();
 
 		expect(isolateScope.selectedLanguage).toBe('en');
 	});
 
 	it('should not try to set language if it is empty', () => {
-		var isolateScope = suite.element.isolateScope();
+		let isolateScope = suite.element.isolateScope();
 
 		isolateScope.selectedLanguage = undefined;
 		suite.scope.$apply();
@@ -50,7 +50,7 @@ describe('languagesDirective', () => {
 	});
 
 	it('should have possibility to set language', () => {
-		var isolateScope = suite.element.isolateScope();
+		let isolateScope = suite.element.isolateScope();
 
 		isolateScope.selectedLanguage = 'fr';
 		suite.scope.$apply();

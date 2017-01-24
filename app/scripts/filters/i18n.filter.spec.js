@@ -21,9 +21,11 @@ describe('i18nFilter', () => {
 	});
 
 	it('should get text from the i18nService', () => {
-		var result = suite.i18n('text', 'lang');
+		let result = suite.i18n('text', 'lang');
 
 		expect(suite.i18nService.getText).toHaveBeenCalledWith('text', 'lang');
 		expect(result).toBe('test');
 	});
 });
+
+

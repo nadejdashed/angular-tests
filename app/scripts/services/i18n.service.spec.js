@@ -36,7 +36,7 @@ describe('i18nService', () => {
 	}
 
 	it('should return promise with languages when try receive languages', () => {
-		var languages,
+		let languages,
 			success;
 
 		success = jasmine.createSpy('success');
@@ -47,7 +47,7 @@ describe('i18nService', () => {
 	});
 
 	it('should set first language as default after request', () => {
-		var languages;
+		let languages;
 
 		expect(suite.i18nService.getLanguage()).not.toBeDefined();
 

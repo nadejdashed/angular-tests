@@ -1,7 +1,7 @@
 import appName from '../app.module';
 
 describe('itemsService', () => {
-	var suite;
+	let suite;
 
 	beforeEach(angular.mock.module(appName));
 
@@ -31,7 +31,7 @@ describe('itemsService', () => {
 	});
 
 	it('should return items on the start', () => {
-		var items;
+		let items;
 
 		items = suite.itemsService.getItems();
 		expect(items).toBeDefined();
@@ -52,3 +52,4 @@ describe('itemsService', () => {
 		expect(suite.itemsService.getItems()).toBe(items);
 	});
 });
+

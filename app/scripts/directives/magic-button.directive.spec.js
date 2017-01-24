@@ -5,10 +5,11 @@ describe('magicButtonDirective', () => {
 
 	beforeEach(angular.mock.module(appName));
 
-	beforeEach(angular.mock.inject(($rootScope, _$compile_) => {
+	beforeEach(angular.mock.inject(($rootScope, _$compile_, $document) => {
 		suite = {};
 		suite.scope = $rootScope.$new();
-		suite.$compile = _$compile_;
+        suite.$document = $document;
+        suite.$compile = _$compile_;
 	}));
 
 	afterEach(() => {
@@ -16,19 +17,19 @@ describe('magicButtonDirective', () => {
 		suite = null;
 	});
 
-	function createDirective(booleanValue){
-		suite.element = '<button magic-button="'+ booleanValue +'"></button>';
+	let createDirective = (booleanValue) => {
+		suite.element = `<button magic-button="${booleanValue}"></button>`;
 		suite.element = suite.$compile(suite.element)(suite.scope);
 		suite.elementScope = suite.element.scope();
 		suite.scope.$digest();
-	}
+	};
 
 	// Used to simulate DOM event
-	function triggerEvent(elem, type){
-		let event = document.createEvent('Event');
+	let triggerEvent = (elem, type) => {
+		let event = suite.$document[0].createEvent('Event');
 		event.initEvent(type);
 		elem.dispatchEvent(event);
-	}
+	};
 
 	it('should have class magic button and should have text "Catch" if attribute is true', () => {
 		createDirective(true);

@@ -18,15 +18,14 @@ describe('appController', () => {
 		}];
 
 		itemsService = {
-			getItems: () => {
-				return items;
-			}
+			getItems: () => items
 		};
 
 		suite = {};
-		suite.$scope = $rootScope;
+		suite.$scope = $rootScope.$new();
 		suite.appController = $controller('appController', {
-			itemsService: itemsService
+			itemsService: itemsService,
+			$scope: suite.$scope
 		});
 		suite.$scope.$apply();
 	}));
@@ -36,7 +35,7 @@ describe('appController', () => {
 	});
 
 	it('should add new item to list with false done status', () => {
-		var length = suite.appController.items.length,
+		let length = suite.appController.items.length,
 			text = 'New task';
 
 		suite.appController.newItem = text;
@@ -55,7 +54,7 @@ describe('appController', () => {
 	});
 
 	it('should remove item from list', () => {
-		var ind = 0,
+		let ind = 0,
 			length = suite.appController.items.length,
 			item = suite.appController.items[ind];
 
@@ -66,14 +65,14 @@ describe('appController', () => {
 	});
 
 	it('should set done to not completed item', () => {
-		var ind = 0;
+		let ind = 0;
 
 		suite.appController.complete(ind);
 		expect(suite.appController.items[ind].done).toBeTruthy();
 	});
 
 	it('should not change item status if task already completed', () => {
-		var ind = 0;
+		let ind = 0;
 
 		suite.appController.complete(ind);
 		expect(suite.appController.items[ind].done).toBeTruthy();

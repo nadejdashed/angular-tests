@@ -1,4 +1,4 @@
-class ResultsDirective {
+class ResultsComponent {
 	constructor (){
 		this.template = require('./results.html');
 		this.bindings = {
@@ -7,15 +7,15 @@ class ResultsDirective {
 			done: '=',
 			clearFunction: '&'
 		};
-		this.controller = ResultsDirectiveCtrl;
+		this.controller = ResultsComponentCtrl;
 	}
 	static createInstance() {
-		ResultsDirective.instance = new ResultsDirective();
-		return ResultsDirective.instance;
+        ResultsComponent.instance = new ResultsComponent();
+		return ResultsComponent.instance;
 	}
 }
 
-class ResultsDirectiveCtrl {
+class ResultsComponentCtrl {
 	reset () {
 		if (this.done){
 			this.clearFunction();
@@ -23,4 +23,4 @@ class ResultsDirectiveCtrl {
 	}
 }
 
-export default ResultsDirective;
+export default ResultsComponent;

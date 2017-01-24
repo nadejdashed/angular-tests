@@ -2,7 +2,7 @@
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 500;
 
-fdescribe('bigButtonDirective', function () {
+describe('bigButtonDirective', function () {
 	var suite;
 
 	beforeEach(module('app'));

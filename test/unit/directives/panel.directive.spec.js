@@ -14,9 +14,11 @@ describe('panelDirective', function () {
 		suite.panelsController = suite.element.controller('panels');
 		spyOn(suite.panelsController, 'addPanel');
 
-		suite.element.after($compile('<div panel header="Temp"><div>Test</div></div>'));
+		var childElement = angular.element('<div panel header="Temp"><div>Test</div></div>')
+		suite.element.append(childElement);
+        childElement = $compile(childElement)(suite.element.scope());
+		suite.isolatedScope = childElement.isolateScope();
 
-		suite.isolatedScope = angular.element(suite.element[0].querySelector('[panel]')).isolateScope();
 		suite.scope.$digest();
 	}));
 

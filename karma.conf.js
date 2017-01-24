@@ -3,12 +3,12 @@
 
 module.exports = function (config) {
 
-	var sourcePreprocessors = 'coverage';
+	var webpackConfig = './webpack-test.config';
 	function isDebug(argument) {
 		return argument === '--debug';
 	}
 	if (process.argv.some(isDebug)) {
-		sourcePreprocessors = [];
+        webpackConfig = './webpack-debug.config';
 	}
 
 	config.set({
@@ -31,12 +31,11 @@ module.exports = function (config) {
 		// preprocess matching files before serving them to the browser
 		// available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
 		preprocessors: {
-			'app/scripts/tests.webpack.js': ['webpack', 'sourcemap']
-			//'app/scripts/**/*.js': sourcePreprocessors
+			'app/scripts/tests.webpack.js': ['webpack']
 		},
 
 
-		webpack: require('./webpack-test.config'),
+		webpack: require(webpackConfig),
 
 
 		webpackMiddleware: {

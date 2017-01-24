@@ -46,22 +46,22 @@
 </head>
 <body>
 
-<div class="wrapper" ng-controller="appController">
-	<languages value="l"></languages>
+<div class="wrapper" ng-controller="appController as app">
+	<languages value="app.l"></languages>
 	<div advertising>
 		<panels>
-			<panel header="{{'Results' | i18n:l}}">
-				<results all="items.length" done="(items | filter:{done: true}).length" clear-function="reset()" lang="l"></results>
+			<panel header="{{'Results' | i18n:app.l}}">
+				<results all="app.items.length" done="(app.items | filter:{done: true}).length" clear-function="app.reset()" lang="app.l"></results>
 			</panel>
 		</panels>
 		<ul>
-			<li ng-repeat="item in items">
-				<span ng-class="{done: item.done}" ng-click="complete($index)">{{item.text}}</span>
-				<a ng-click="remove($index)">{{'Remove' | i18n:l}}</a>
+			<li ng-repeat="item in app.items">
+				<span ng-class="{done: item.done}" ng-click="app.complete($index)">{{item.text}}</span>
+				<a ng-click="app.remove($index)">{{'Remove' | i18n:app.l}}</a>
 			</li>
 		</ul>
-		<input type="text" ng-model="newItem"/>
-		<button ng-click="add()" magic-button="{{items.length > 3}}">{{buttonText | i18n:l}}</button>
+		<input type="text" ng-model="app.newItem"/>
+		<button ng-click="app.add()" magic-button="{{app.items.length > 3}}">{{buttonText | i18n:app.l}}</button>
 	</div>
 </div>
 <div class="footer">

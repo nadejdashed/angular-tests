@@ -13,7 +13,7 @@ import I18nService from "./services/i18n.service";
 import ItemsService from "./services/items.service";
 
 export default angular.module('app', [])
-    .component('results', ResultsDirective)
+    .component('results', ResultsDirective.createInstance())
     .controller('appController', AppController)
     .directive('advertising', AdvertisingDirective)
     .directive('bigButton', BigButtonDirective)

@@ -10,7 +10,7 @@ function requestLanguages(){
 	promise = $http.get('/translations.json').then((response) => {
 		var data = response.data;
 
-		languages = languages.concat(Object.keys(data));
+		languages.push(...Object.keys(data));
 		language = languages[0];
 		texts = data;
 
@@ -22,6 +22,8 @@ function requestLanguages(){
 class I18nService {
 	constructor(__$http__) {
 		$http = __$http__;
+		promise = language = texts = undefined;
+		languages = [];
 	}
 	getLanguage () {
 		return language;

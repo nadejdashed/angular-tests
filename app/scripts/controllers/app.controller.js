@@ -1,35 +1,37 @@
-'use strict';
+let itemsService;
 
-var AppController = ['$scope', 'itemsService', function ($scope, itemsService) {
-	$scope.items = itemsService.getItems();
-	$scope.newItem = '';
+class AppController {
+	constructor(__itemsService__) {
+		itemsService = __itemsService__;
 
-	$scope.add = function () {
-		var item = {
+		this.items = itemsService.getItems();
+		this.newItem = '';
+	}
+	add () {
+		let item = {
 			done: false,
-			text: $scope.newItem
+			text: this.newItem
 		};
 
-		$scope.items.push(item);
-		$scope.newItem = '';
-	};
+		this.items.push(item);
+		this.newItem = '';
+	}
+	remove (ind) {
+		this.items.splice(ind, 1);
+	}
+	complete (ind) {
+		this.items[ind].done = true;
+	}
+	reset () {
+		let i = this.items.length;
+		while( i-- ) {
+			if(this.items[i].done) {
+				this.items.splice(i, 1);
+			}
+		}
+	}
+}
 
-	$scope.remove = function (ind) {
-		$scope.items.splice(ind, 1);
-	};
-
-	$scope.complete = function (ind) {
-		$scope.items[ind].done = true;
-	};
-
-	$scope.reset = function(){
-        var i = $scope.items.length;
-        while( i-- ) {
-            if($scope.items[i].done) {
-                $scope.items.splice(i, 1);
-            }
-        }
-	};
-}];
+AppController.$inject = ['itemsService'];
 
 export default AppController;

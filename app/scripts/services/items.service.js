@@ -1,21 +1,27 @@
 'use strict';
 
-var ItemsService = ['$http', function ($http) {
-	var promise,
+let $http,
+	promise,
+	items = [];
+
+let requestItems = () => {
+	promise = $http.get('/items').then((response) => {
+		items.push(...response.data);
+	});
+};
+
+class ItemsService {
+	constructor(__$http__) {
+		$http = __$http__;
+		promise = undefined;
 		items = [];
-
-	return {
-		getItems: function () {
-			promise || requestItems();
-			return items;
-		}
-	};
-
-	function requestItems(){
-		promise = $http.get('/items').then(function (response) {
-			Array.prototype.push.apply(items, response.data);
-		});
 	}
-}];
+	getItems () {
+		promise || requestItems();
+		return items;
+	}
+}
+
+ItemsService.$inject = ['$http'];
 
 export default ItemsService;

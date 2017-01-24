@@ -1,11 +1,11 @@
-'use strict';
+import appName from '../app.module';
 
-describe('i18nService', function () {
-	var suite;
+describe('i18nService', () => {
+	let suite;
 
-	beforeEach(module('app'));
+	beforeEach(angular.mock.module(appName));
 
-	beforeEach(inject(function ($injector) {
+	beforeEach(angular.mock.inject(($injector) => {
 		suite = {};
 		suite.$httpBackend = $injector.get('$httpBackend');
 		suite.$httpBackend.when('GET', '/translations.json').respond({
@@ -20,7 +20,7 @@ describe('i18nService', function () {
 		suite.i18nService = $injector.get('i18nService');
 	}));
 
-	afterEach(function () {
+	afterEach(() => {
 		// Verifies that all of the requests defined via the expect api were made.
 		// If any of the requests were not made, verifyNoOutstandingExpectation throws an exception.
 		suite.$httpBackend.verifyNoOutstandingExpectation();
@@ -35,7 +35,7 @@ describe('i18nService', function () {
 		suite.$httpBackend.flush();
 	}
 
-	it('should return promise with languages when try receive languages', function () {
+	it('should return promise with languages when try receive languages', () => {
 		var languages,
 			success;
 
@@ -46,7 +46,7 @@ describe('i18nService', function () {
 		expect(success).toHaveBeenCalledWith(['en', 'ru']);
 	});
 
-	it('should set first language as default after request', function () {
+	it('should set first language as default after request', () => {
 		var languages;
 
 		expect(suite.i18nService.getLanguage()).not.toBeDefined();
@@ -57,18 +57,18 @@ describe('i18nService', function () {
 		expect(suite.i18nService.getLanguage()).toBe('en');
 	});
 
-	it('should return text for default language if language is not changed', function () {
+	it('should return text for default language if language is not changed', () => {
 		getLanguages();
 		expect(suite.i18nService.getText('Test')).toBe('TestEN');
 	});
 
-	it('should return text for changed language if another language was set', function () {
+	it('should return text for changed language if another language was set', () => {
 		getLanguages();
 		suite.i18nService.setLanguage('ru');
 		expect(suite.i18nService.getText('Test')).toBe('TestRU');
 	});
 
-	it('should not change language if language is not defined or not exist in languages list', function () {
+	it('should not change language if language is not defined or not exist in languages list', () => {
 		getLanguages();
 		suite.i18nService.setLanguage('ru');
 		suite.i18nService.setLanguage('fr');
@@ -76,13 +76,13 @@ describe('i18nService', function () {
 		expect(suite.i18nService.getLanguage()).toBe('ru');
 	});
 
-	it('should not change language if language is not exist in translation list', function () {
+	it('should not change language if language is not exist in translation list', () => {
 		getLanguages();
 		suite.i18nService.setLanguage('fr');
 		expect(suite.i18nService.getLanguage()).toBe('en');
 	});
 
-	it('should return empty string if key does not exist', function () {
+	it('should return empty string if key does not exist', () => {
 		getLanguages();
 		expect(suite.i18nService.getText('temp')).toBe('');
 	});

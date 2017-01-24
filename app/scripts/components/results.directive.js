@@ -1,22 +1,26 @@
-'use strict';
+class ResultsDirective {
+	constructor (){
+		this.template = require('./results.html');
+		this.bindings = {
+			l: '=lang',
+			all: '=',
+			done: '=',
+			clearFunction: '&'
+		};
+		this.controller = ResultsDirectiveCtrl;
+	}
+	static createInstance() {
+		ResultsDirective.instance = new ResultsDirective();
+		return ResultsDirective.instance;
+	}
+}
 
-var ResultsDirective = {
-	template: require('./results.html'),
-	bindings: {
-		l: '=lang',
-		all: '=',
-		done: '=',
-		clearFunction: '&'
-	},
-	controller: function(){
-		var ctrl = this;
-
-		this.reset = function(){
-			if (ctrl.done){
-				ctrl.clearFunction();
-			}
+class ResultsDirectiveCtrl {
+	reset () {
+		if (this.done){
+			this.clearFunction();
 		}
 	}
-};
+}
 
 export default ResultsDirective;
